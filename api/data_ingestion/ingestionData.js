@@ -37,7 +37,7 @@ function insertToDB(data) {
     ]);
 
     //call insert api đến mysql_api
-    axios.post('http://mysql_api:8080/mysql-api/insert-multiple', { data: values })
+    axios.post('http://mysql_api:8080/insert-multiple', { data: values })
     .then(res => console.log(res.data))
     .catch(err => console.error('Lỗi:', err.message));
 }

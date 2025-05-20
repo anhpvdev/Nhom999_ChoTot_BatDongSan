@@ -71,11 +71,11 @@ function startCrawlJob(time) {
 }
 
 startCrawlJob(__config.currentSchedule);
-craw_data()
+// craw_data()
 
 
 // api cào datadata
-app.get('/craw/craw-data', async (req, res) => {
+app.get('/craw-data', async (req, res) => {
   try {
     const BDS  = await craw_data();
 
@@ -90,7 +90,7 @@ app.get('/craw/craw-data', async (req, res) => {
 
 
 //api thay đổi thời gian cào
-app.put('/craw/update-time', (req, res) => {
+app.put('/update-time', (req, res) => {
  try {
    const {time} = req.body;
  
@@ -121,7 +121,7 @@ app.put('/craw/update-time', (req, res) => {
 });
 
 //api thay đổi limit
-app.put('/craw/update-limit', (req, res) => {
+app.put('/update-limit', (req, res) => {
   try {
     const {limit} = req.body;
   

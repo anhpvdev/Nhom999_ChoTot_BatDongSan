@@ -120,7 +120,7 @@
 
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script>
-    var find_port = 8080;
+    var find_port = 'mysql_api';
     var autocomplete = null;
 
     $("#searchInput").on("keyup", function(event) {
@@ -133,7 +133,7 @@
           autocomplete = setTimeout(function() {
             $.ajax({
               type: "GET",
-              url: `http://localhost:${find_port}/mysql-api/find`,
+              url: `http://localhost/${find_port}/find`,
               data: { query: keyWord }
             }).done(function(data) {
               if(data.status !== 'success') return $('.reviews').html('Lỗi khi tìm kiếm dữ liệu.');
