@@ -1,0 +1,78 @@
+version: "3.9"
+services:
+  mysql:
+    container_name: mysql
+    build: ./api/mysql
+    ports:
+      - "6603:3306"
+    networks:
+      - intern-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mysql_api:
+    container_name: mysql_api
+    build: .
+    working_dir: /app/api/mysql_api
+    command: node mysql_api.js
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - intern-network
+
+  web_page:
+    container_name: web_page
+    build: .
+    working_dir: /app/api/web_page
+    command: node web.js
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mysql_api
+    networks:
+      - intern-network
+
+  data_ingestion:
+    container_name: data_ingestion
+    build: .
+    working_dir: /app/api/data_ingestion
+    command: node ingestionData.js
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "3002:3000"
+    depends_on:
+      - mysql_api
+    networks:
+      - intern-network
+    
+  data_craw:
+    container_name: data_craw
+    build: .
+    working_dir: /app/api/data_craw
+    command: node crawData.js
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "8000:8000"
+    depends_on:
+      - data_ingestion
+    networks:
+      - intern-network
+
+networks:
+  intern-network:
