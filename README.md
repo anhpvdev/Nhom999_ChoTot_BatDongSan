@@ -29,7 +29,7 @@ Dự án này được xây dựng nhằm thu thập dữ liệu từ website ch
 
 ```bash
 # 1. Clone repo
-git https://github.com/anhpvdev/Nhom999_ChoTot_BatDongSan
+git clone  https://github.com/anhpvdev/Nhom999_ChoTot_BatDongSan
 cd Nhom999_ChoTot_BatDongSan
 
 # 2. Khởi chạy hệ thống
