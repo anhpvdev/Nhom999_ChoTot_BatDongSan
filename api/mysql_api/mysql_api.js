@@ -24,7 +24,7 @@ app.use(express.json());
 
 
 //api lấy toàn bộ dữ liệu db
-app.get('/mysql-api/alldata', async (req, res) => {
+app.get('/alldata', async (req, res) => {
   try {
     const [BDS] = await db.execute('SELECT * FROM danhsach ORDER BY created_at DESC');
 
@@ -36,7 +36,7 @@ app.get('/mysql-api/alldata', async (req, res) => {
 });
 
 //api xóa toàn bộ dữ liệu db
-app.delete('/mysql-api/alldata', async (req, res) => {
+app.delete('/alldata', async (req, res) => {
   try {
     fs.writeFileSync(filePath,'[]', 'utf-8'); // xoa toan bo du lieu json file
     const [result] = await db.execute('DELETE  FROM danhsach');
@@ -49,7 +49,7 @@ app.delete('/mysql-api/alldata', async (req, res) => {
 });
 
 //api tìm kiếm
-app.get('/mysql-api/find', async (req, res) => {
+app.get('/find', async (req, res) => {
   try {
     const { query } = req.query;
 
@@ -66,7 +66,7 @@ app.get('/mysql-api/find', async (req, res) => {
 });
 
 //api insert dữ liệu
-app.post('/mysql-api/insert-multiple', async (req, res) => {
+app.post('/insert-multiple', async (req, res) => {
   try {
     const { data } = req.body; //data đầu vào là 1 mảng 2 chiều các dòng dữ liệu đã được xử lý
     const insertQuery = `INSERT IGNORE INTO danhsach(id, name, info, price, street, image) VALUES ?`;

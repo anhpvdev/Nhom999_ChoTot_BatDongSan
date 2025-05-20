@@ -9,6 +9,7 @@ Dự án này được xây dựng nhằm thu thập dữ liệu từ website ch
 ### Các thành phần chính:
 | Thành phần | Mô tả |
 |-----------|------|
+| **nginx** | Api Gateway trung gian giữa các service, định tuyến các request từ client đến service tương ứng trong mạng nội bộ. |
 | **data_craw** | Gửi request đến API để lấy dữ liệu sau đó lưu vào data.json, có thể chạy theo lịch cố định hoặc thiết lập thời gian. |
 | **data.json (JSON Files)** | Nơi lưu dữ liệu cào được từ data_craw ở định dạng JSON. |
 | **data_ingestion** | Đọc dữ liệu từ data.json, khi có dữ liệu mới thì insert vào database. |

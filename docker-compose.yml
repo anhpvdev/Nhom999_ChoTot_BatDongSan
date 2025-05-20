@@ -3,8 +3,6 @@ services:
   mysql:
     container_name: mysql
     build: ./api/mysql
-    ports:
-      - "6603:3306"
     networks:
       - intern-network
     healthcheck:
@@ -21,8 +19,6 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-    ports:
-      - "8080:8080"
     depends_on:
       mysql:
         condition: service_healthy
@@ -37,8 +33,6 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-    ports:
-      - "8081:8081"
     depends_on:
       - mysql_api
     networks:
@@ -52,8 +46,6 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-    ports:
-      - "3002:3000"
     depends_on:
       - mysql_api
     networks:
@@ -67,12 +59,28 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-    ports:
-      - "8000:8000"
     depends_on:
       - data_ingestion
     networks:
       - intern-network
 
+  api_gateway:
+    image: nginx:latest
+    container_name: api_gateway
+    volumes:
+      - ./api/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "80:80"
+    depends_on:
+      - mysql_api
+      - web_page
+      - data_ingestion
+      - data_craw
+    networks:
+      - intern-network
+
+
 networks:
   intern-network:
+    name: nhom999_network
+    driver: bridge
