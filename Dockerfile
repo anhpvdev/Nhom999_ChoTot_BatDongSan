@@ -4,9 +4,6 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
+# RUN npm install
 
 COPY . .
-
-# Default (bị override bởi docker-compose)
-CMD ["node", "index.js"]
