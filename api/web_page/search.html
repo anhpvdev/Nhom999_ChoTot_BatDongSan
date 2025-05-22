@@ -134,32 +134,32 @@
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script>
     var find_port = 'mysql_api';
-    var autocomplete = null;
+    var sendQuery = null;
 
     $("#searchInput").on("keyup", function(event) {
       var keyWord = $(this).val();
       var key = event.keyCode;
-      if (![38, 40, 37, 39, 13].includes(key)) {
-        if (keyWord.trim().length > 0) {
+      if(![38, 40, 37, 39, 13].includes(key)) {
+        if(keyWord.trim().length > 0) {
           $('.reviews').text('Đang tìm...')
-          clearTimeout(autocomplete);
-          autocomplete = setTimeout(function() {
+          clearTimeout(sendQuery);
+          sendQuery = setTimeout(function() {
             $.ajax({
               type: "GET",
               url: `http://localhost/${find_port}/find`,
               data: { query: keyWord }
             }).done(function(data) {
               if(data.status !== 'success') return $('.reviews').html('Lỗi khi tìm kiếm dữ liệu.');
+
               const BDS = data.data;
               if(BDS.length == 0){
                 $('.reviews').html('Không tìm thấy kết quả nào.');
                 $('#results').html('');
                 return
               }
-
               $(".reviews").html('Tìm thấy '+BDS.length+ ' kết quả')
               let html = '';
-              for (const item of BDS) {
+              for(const item of BDS){
                 html += `
                   <div class="listing">
                     <a href="https://www.nhatot.com/a/${item.id}.htm">
@@ -170,16 +170,14 @@
                       <div>${item.info}</div>
                     </div>
                      </a>
-                  </div>
-               
-                `;
+                  </div>`;
               }
               $('#results').html(html);
-            }).fail(function() {
+            }).fail(function(){
               $('#results').html('<p>Lỗi khi tìm kiếm dữ liệu.</p>');
             });
           }, 500);
-        } else {
+        }else {
           $('#results').html('');
         }
       }

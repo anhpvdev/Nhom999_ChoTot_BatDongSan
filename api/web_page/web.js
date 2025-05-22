@@ -6,12 +6,9 @@ const cors = require('cors');
 app.use(cors());
 app.use(express.static(__dirname));
 
-// Dùng để phục vụ file tĩnh (CSS/JS nếu có)
-app.use(express.static(path.join(__dirname, 'public')));
-
 // Route trang chủ
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'seach.html'));
+  res.sendFile(path.join(__dirname, 'search.html'));
 });
 
 app.listen(PORT, () => {
