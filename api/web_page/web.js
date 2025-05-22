@@ -4,6 +4,7 @@ const app = express();
 const PORT = 8081;
 const cors = require('cors');
 app.use(cors());
+app.use(express.static(__dirname));
 
 // Dùng để phục vụ file tĩnh (CSS/JS nếu có)
 app.use(express.static(path.join(__dirname, 'public')));
