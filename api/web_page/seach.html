@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Tìm kiếm Bất động sản</title>
+  <link rel="icon" href="logo999.png" type="image/png">
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -53,7 +54,7 @@
       margin: 0 auto;
     }
 
-    .listing {
+        .listing {
       width: 23%;
       display: flex;
       flex-direction: column;
@@ -62,9 +63,18 @@
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.05);
       box-sizing: border-box;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .listing a{
+    .listing:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 15px rgba(0,0,0,0.15);
+      cursor: pointer;
+      z-index: 10;
+      border: 2px solid #7cc0eb;
+    }
+
+    .listing a {
       text-decoration: none;
     }
 
@@ -109,6 +119,9 @@
   </style>
 </head>
 <body>
+   <div style="width: 100%; display: flex; align-items: center; justify-content: flex-start;">
+  <img src="logo.jpg" alt="Logo Group 999" style="height: 140px; border: 1px solid red; border-radius: 8px; margin-bottom: -100px; margin-left: 90px;" />
+</div>
   <h2>Tìm kiếm Bất động sản</h2>
   <div class="search-container">
     <input type="text" id="searchInput" placeholder="Nhập từ khóa..." />
