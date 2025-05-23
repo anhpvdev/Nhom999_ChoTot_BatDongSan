@@ -146,7 +146,8 @@
           sendQuery = setTimeout(function() {
             $.ajax({
               type: "GET",
-              url: `http://localhost/${find_port}/find`,
+              // url: `http://localhost/${find_port}/find`,
+              url: `./find`,
               data: { query: keyWord }
             }).done(function(data) {
               if(data.status !== 'success') return $('.reviews').html('Lỗi khi tìm kiếm dữ liệu.');

@@ -57,7 +57,7 @@ app.get('/find', async (req, res) => {
     return res.status(200).json({status:'success', data: BDS});
   }catch(err) {
     console.error('Lỗi tìm kiếm:', err.message);
-    return res.status(500).json({status:'error',message: 'Lỗi khi insert dữ liệu' });
+    return res.status(500).json({status:'error',message: 'Lỗi khi tìm kiếm dữ liệu' });
   }
 });
 
